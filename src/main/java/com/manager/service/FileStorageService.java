@@ -54,6 +54,7 @@ public class FileStorageService {
             
             AppUtils.preCondition(!resource.exists(), "File not found "+fileName);
         } catch (MalformedURLException ex) {
+        		ex.printStackTrace();
         		AppUtils.preCondition(true, "File not found "+fileName, ex);
         }
         
@@ -82,6 +83,7 @@ public class FileStorageService {
 	    	    		outputSream.write(bytes, 0, read);
 	    	    }
     		}catch(IOException iex) {
+    			iex.printStackTrace();
     			AppUtils.preCondition(true, "Failed to read file "+fileName, iex);
     		}finally {
     			try {
@@ -102,6 +104,7 @@ public class FileStorageService {
             Path dest  = this.fileStorageLocation.resolve(newFileName).normalize();
             Files.copy(src,dest);
 		}catch(IOException iex) {
+			iex.printStackTrace();
 			AppUtils.preCondition(true, "No Such file exist .. ", iex);
 		}
 		return newFileName;
@@ -115,6 +118,7 @@ public class FileStorageService {
 	    try {
 			Files.delete(fileToDeletePath);
 		} catch (IOException e) {
+			e.printStackTrace();
 			AppUtils.preCondition(true, "No Such file exist .. "+fileName, e);
 		}
 	    
